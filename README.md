@@ -18,18 +18,18 @@ This project implements a 64KB Random Access Memory (RAM) using Verilog. It prov
 The 64KB RAM is built using the following components:
 
 1. Registers (dfrl_16):
-   • Each register stores 16 bits.
-   • Includes features like reset, load, and clocked input to update values.
+   - Each register stores 16 bits.
+   - Includes features like reset, load, and clocked input to update values.
 2. Register File (reg_file):
-   • Consists of 8 registers, each 16-bits wide, which together form 8 words of 16 bits.
-   • Allows two simultaneous reads and one write.
+   - Consists of 8 registers, each 16-bits wide, which together form 8 words of 16 bits.
+   - Allows two simultaneous reads and one write.
 3. Multiplexers and Demultiplexers:
-   • mux8_16: Used for reading from one of the registers.
-   • demux8: Controls which register receives the data during writes.
+   - mux8_16: Used for reading from one of the registers.
+   - demux8: Controls which register receives the data during writes.
 4. Scaling the Design to 64KB:
-   • The 64KB RAM requires 4096 words, each of 16 bits.
-   • This design will use 512 instances of reg_file (8 × 512 = 4096 words).
-   • Additional multiplexers and demultiplexers will manage read and write operations across the 512 blocks.
+   - The 64KB RAM requires 4096 words, each of 16 bits.
+   - This design will use 512 instances of reg_file (8 × 512 = 4096 words).
+   - Additional multiplexers and demultiplexers will manage read and write operations across the 512 blocks.
 
 # Module Descriptions
 
