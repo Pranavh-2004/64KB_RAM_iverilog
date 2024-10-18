@@ -35,6 +35,10 @@ module tb_ram8b;
         rd_addr_b = 0;
         d_in = 16'h0000;
 
+        // Initialize GTKWave dumpfile
+        $dumpfile("ram8b.vcd");    // Specify the VCD file name
+        $dumpvars(0, tb_ram8b);     // Dump all variables in the testbench
+
         // Reset the RAM
         #10 reset = 0;
         #10 reset = 1;
