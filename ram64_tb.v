@@ -21,6 +21,18 @@ module tb_ram64;
     // Clock generation
     always #5 clk = ~clk;  // Clock period 10 time units
 
+    // Monitor changes in key signals
+    initial begin
+        $monitor("Time=%0t | clk=%b | reset=%b | wr=%b | wr_addr=%b | d_in=%h | rd_addr_a=%b | rd_addr_b=%b | d_out_a=%h | d_out_b=%h", 
+                 $time, clk, reset, wr, wr_addr, d_in, rd_addr_a, rd_addr_b, d_out_a, d_out_b);
+    end
+
+    // VCD dump setup
+    initial begin
+        $dumpfile("tb_ram64.vcd"); // Create VCD file
+        $dumpvars(0, tb_ram64);     // Dump all variables in this module
+    end
+
     // Test sequence
     initial begin
         // Initialize signals
