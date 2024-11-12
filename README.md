@@ -11,64 +11,71 @@ PESU Sem 3: Project for DDCO.
 
 # Project Overview
 
-This project implements a 64KB Random Access Memory (RAM) using Verilog. It provides a modular design consisting of register-based storage elements, multiplexers, and demultiplexers, which together mimic the behavior of RAM. The design focuses on simplicity and scalability by using 16-bit wide registers grouped into multiple blocks.
+This project implements a modular 64KB Random Access Memory (RAM) in Verilog, focusing on simplicity and scalability. It utilizes 16-bit wide registers organized into blocks, along with multiplexers and demultiplexers to effectively simulate RAM behavior.
+A comprehensive testbench has been developed to verify the RAM module's basic read and write operations, featuring real-time monitoring of signal changes during simulation. This project serves as an educational resource for understanding memory architecture and Verilog programming.
 
-# System Architecture
+## Features
 
-The 64KB RAM is built using the following components:
+- 64KB memory capacity (65536 bytes).
+- Supports 8-bit data width.
+- Read and write operations controlled by a write enable signal.
+- Comprehensive testbench with signal monitoring and waveform generation.
 
-1. Registers (dfrl_16):
-   - Each register stores 16 bits.
-   - Includes features like reset, load, and clocked input to update values.
-2. Register File (reg_file):
-   - Consists of 8 registers, each 16-bits wide, which together form 8 words of 16 bits.
-   - Allows two simultaneous reads and one write.
-3. Multiplexers and Demultiplexers:
-   - mux8_16: Used for reading from one of the registers.
-   - demux8: Controls which register receives the data during writes.
-4. Scaling the Design to 64KB:
-   - The 64KB RAM requires 4096 words, each of 16 bits.
-   - This design will use 512 instances of reg_file (8 × 512 = 4096 words).
-   - Additional multiplexers and demultiplexers will manage read and write operations across the 512 blocks.
+## Modules
 
-# Module Descriptions
+### RAM Module (`ram_64kb.v`)
 
-1. dfrl_16:
+This module implements a simple 64KB RAM structure. It includes:
 
-- Implements a 16-bit register with:
-- Clock input for synchronous operations.
-- Reset input to initialize the register to 0.
-- Load signal to enable writing data into the register.
+- **Inputs**:
 
-2. reg_file:
+  - `clk`: Clock signal for synchronization.
+  - `address`: 16-bit address bus for accessing memory locations.
+  - `data_in`: 8-bit data input for writing to memory.
+  - `we`: Write enable signal to control write operations.
 
-- Contains 8 registers of 16-bit width.
-- Supports two simultaneous reads and one write.
-- Uses multiplexers for reading and demultiplexers for writing.
+- **Output**:
+  - `data_out`: 8-bit data output for reading from memory.
 
-3. mux8_16 and demux8:
+### Testbench (`tb_ram_64kb.v`)
 
-- Control the selection of registers for read and write operations.
+The testbench verifies the functionality of the RAM module. It includes:
 
-4. top_module:
+- Signal initialization and clock generation.
+- Write and read operations to test memory functionality.
+- Monitoring of key signals during simulation.
+- VCD file generation for waveform analysis.
 
-- Scales up the design to 64KB RAM by combining multiple reg_file blocks.
-- Adds additional control logic for addressing the memory blocks.
+## Usage
 
-# Usage and Testing
+To simulate the RAM module and its testbench, follow these steps:
 
-1. Writing Data:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/64kb-ram-verilog.git
+   cd 64kb-ram-verilog
+   ```
+2. **Open your Verilog simulator (e.g., ModelSim, Vivado)**
 
-- Provide the write address, data input, and write enable signal to write data into the selected address.
+3. **Compile the modules**:
 
-2. Reading Data:
+- Compile both ram_64kb.v and tb_ram_64kb.v.
 
-- Provide the read address to read data from the desired memory location.
-- The design supports simultaneous reading from two addresses.
+4. **Run the simulation**:
 
-3. Reset Operation:
+- Execute the testbench to observe the results in the console and waveform viewer.
 
-- When the reset signal is activated, all memory locations are initialized to 0.
+5. **View results**:
+
+- Check the console output for monitored signals.
+- Open the generated VCD file (tb_ram_64kb.vcd) in a waveform viewer to analyze signal transitions.
+
+## Requirements
+
+To run this project, you need:
+
+- A Verilog simulator (e.g., ModelSim, Vivado).
+- Basic knowledge of Verilog syntax and simulation concepts.
 
 # Future Enhancements
 
