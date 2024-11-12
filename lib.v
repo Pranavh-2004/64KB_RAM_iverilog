@@ -92,6 +92,7 @@ module demux4 (input wire i, j1, j0, output wire [0:3] o);
     demux2 demux2_2 (t1, j0, o[2], o[3]);
 endmodule
 
+/*
 module demux8 (input wire i, j2, j1, j0, output wire [0:7] o);
    wire t0, t1;
    demux2 demux2_0 (i, j2, t0, t1);         // Correct - 4 ports
@@ -100,8 +101,8 @@ module demux8 (input wire i, j2, j1, j0, output wire [0:7] o);
    demux2 demux2_3 (t0, j1, o[4], o[5]);    // Correct - split into 2 bits
    demux2 demux2_4 (t1, j1, o[6], o[7]);    // Correct - split into 2 bits
 endmodule
+*/
 
-/*
 module demux8 (
     input wire i,         // Input signal
     input wire j2, j1, j0, // 3-bit select signals
@@ -112,7 +113,7 @@ module demux8 (
     demux4 demux4_0 (t0, j1, j0, o[0:3]);    // Lower 4 outputs (o[0] to o[3])
     demux4 demux4_1 (t1, j1, j0, o[4:7]);    // Upper 4 outputs (o[4] to o[7])
 endmodule
-*/
+
 
 module df (input wire clk, in, output wire out);
     reg df_out;
